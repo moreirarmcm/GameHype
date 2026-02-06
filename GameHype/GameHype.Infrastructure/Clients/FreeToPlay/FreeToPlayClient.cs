@@ -6,6 +6,7 @@ using GameHype.Infrastructure.Clients.FreeToPlay.Caching;
 using GameHype.Infrastructure.Clients.FreeToPlay.Casting;
 using GameHype.Infrastructure.Clients.FreeToPlay.Models;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,11 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay
         private readonly IMemoryCache _memoryCache;
         private readonly FreeToPlayCacheParams _cacheParams;
 
-        public FreeToPlayClient(HttpClient http, IMemoryCache cache, FreeToPlayCacheParams cacheParams)
+        public FreeToPlayClient(HttpClient http, IMemoryCache cache, IOptions<FreeToPlayCacheParams> cacheParams)
         {
             _http = http;
             _memoryCache = cache;
-            _cacheParams = cacheParams;
+            _cacheParams = cacheParams.Value;
         }
         public async Task <ExternalRecommendedGame?> GetRecommendedGameAsync(List<string> genre, string? platform, int? ramMb)
         {
