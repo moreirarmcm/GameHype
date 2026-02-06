@@ -10,6 +10,6 @@ namespace GameHype.Application.Interfaces
     public interface IGameRecommenderRepository
     {
         Task SaveRecommendedGameAsync(Game game);
-        Task <List<Game>> GetRecommendedGamesHistoryAsync();
+        Task <IReadOnlyList<Game>> GetRecommendedGamesHistoryAsync();
     }
 }

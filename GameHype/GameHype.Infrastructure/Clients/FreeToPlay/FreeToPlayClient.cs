@@ -27,10 +27,9 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay
             _memoryCache = cache;
             _cacheParams = cacheParams;
         }
-
         public async Task <ExternalRecommendedGame?> GetRecommendedGameAsync(List<string> genre, string? platform, int? ramMb)
         {
-            var gamesCandidates = await GetGamesCandidatesInCacheAsync(genre, platform, ramMb); 
+            var gamesCandidates = await GetGamesCandidatesInCacheAsync(genre, platform); 
             if (gamesCandidates.Count == 0) return null;
 
             if (ramMb is null)
@@ -66,29 +65,27 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay
                 {
                     return new RecommendedGamesDetailsResponse { Id = id, MinimumRamMb = null };
                 }
-
                 var minimumRamMb = RamConversor.ConvertRamStringToMb(gameDetails.MinimumSystemRequirements?.Memory);
 
-            return new RecommendedGamesDetailsResponse
-            {
-                Id = gameDetails.Id,
-                MinimumRamMb = minimumRamMb
-            };
+                return new RecommendedGamesDetailsResponse {
+                    Id = gameDetails.Id,
+                    MinimumRamMb = minimumRamMb
+                };
             }) ?? new RecommendedGamesDetailsResponse { Id = id, MinimumRamMb = null };
         }
 
-        private async Task <List<FreeToPlayGamesItens>> GetGamesCandidatesInCacheAsync (List<string> genre, string? platform, int? ramMb)
+        private async Task <List<FreeToPlayGamesItens>> GetGamesCandidatesInCacheAsync (List<string> genre, string? platform)
         {
             var cacheKey =  FreeToPlayCacheKeys.FilterCacheKey(genre, platform);
 
             return await _memoryCache.GetOrCreateAsync(cacheKey, async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = _cacheParams.FilterTtl;            
-                var tag = FreeToPlayCacheKeys.NormalizedGenre(genre);
-
+                var tag = FreeToPlayCacheKeys.NormalizedGenres(genre);
+                var platformNormalized = FreeToPlayCacheKeys.NormalizedPlatform(platform);
                 if (string.IsNullOrWhiteSpace(tag)) return new List<FreeToPlayGamesItens>();
 
-                var url = $"filter?tag={Uri.EscapeDataString(tag)}&platform={Uri.EscapeDataString(platform)}";
+                var url = $"filter?tag={Uri.EscapeDataString(tag)}&platform={Uri.EscapeDataString(platformNormalized)}";
                 var list = await _http.GetFromJsonAsync<List<FreeToPlayGamesItens>>(url);
 
                 return list ?? new List<FreeToPlayGamesItens>();
