@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8BCD7729-1277-4772-B9E3-DDF1BDD706E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4922D370-7190-4D1F-BCAD-6BA5A2B91171}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{10119BB5-C65C-44C4-9F68-DD2B3B72EFF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHype.Application", "GameHype.Application\GameHype.Application.csproj", "{FB6A6E80-2F9F-4F33-B63E-E5B9562AB7E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHype.Domain", "GameHype.Domain\GameHype.Domain.csproj", "{4E8D963C-10F3-4185-B853-6383239B54DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHype.Infrastructure", "GameHype.Infrastructure\GameHype.Infrastructure.csproj", "{63EE09AB-254D-40A0-AA2B-9F4ED299763D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHype.WebAPI", "GameHype.WebAPI\GameHype.WebAPI.csproj", "{1BA41B99-76C9-4719-9E06-12EFB09B49C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB6A6E80-2F9F-4F33-B63E-E5B9562AB7E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB6A6E80-2F9F-4F33-B63E-E5B9562AB7E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB6A6E80-2F9F-4F33-B63E-E5B9562AB7E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB6A6E80-2F9F-4F33-B63E-E5B9562AB7E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E8D963C-10F3-4185-B853-6383239B54DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8D963C-10F3-4185-B853-6383239B54DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8D963C-10F3-4185-B853-6383239B54DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8D963C-10F3-4185-B853-6383239B54DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EE09AB-254D-40A0-AA2B-9F4ED299763D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EE09AB-254D-40A0-AA2B-9F4ED299763D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EE09AB-254D-40A0-AA2B-9F4ED299763D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EE09AB-254D-40A0-AA2B-9F4ED299763D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BA41B99-76C9-4719-9E06-12EFB09B49C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA41B99-76C9-4719-9E06-12EFB09B49C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA41B99-76C9-4719-9E06-12EFB09B49C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA41B99-76C9-4719-9E06-12EFB09B49C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FB6A6E80-2F9F-4F33-B63E-E5B9562AB7E2} = {8BCD7729-1277-4772-B9E3-DDF1BDD706E1}
+		{4E8D963C-10F3-4185-B853-6383239B54DA} = {8BCD7729-1277-4772-B9E3-DDF1BDD706E1}
+		{63EE09AB-254D-40A0-AA2B-9F4ED299763D} = {4922D370-7190-4D1F-BCAD-6BA5A2B91171}
+		{1BA41B99-76C9-4719-9E06-12EFB09B49C9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88CADDB0-52F8-47D4-AC61-8CDAB09C7C68}
+	EndGlobalSection
+EndGlobal
