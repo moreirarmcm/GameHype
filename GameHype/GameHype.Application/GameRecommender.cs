@@ -24,9 +24,6 @@ namespace GameHype.Application
         }
         public async Task<RecommendedGamesResponse?> RecommendedGameAsync(RecommendedGamesRequest request)
         {
-            if (request.Genres == null || request.Genres.Count == 0)
-                throw new ArgumentException("É necessário especificar, ao menos, um gênero.", nameof(request.Genres));
-
             var chosenGame = await _freeToPlayClient.GetRecommendedGameAsync(request.Genres, request.Platform, request.RamMb);
 
             if (chosenGame == null)
