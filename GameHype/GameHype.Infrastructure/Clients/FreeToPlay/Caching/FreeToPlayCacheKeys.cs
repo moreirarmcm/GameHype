@@ -11,7 +11,7 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay.Caching
         public static string FilterCacheKey(List<string> genre, string? platform)
         {
             var platformNormalized = NormalizedPlatform(platform);  
-            var genreNormalized = NormalizedGenre(genre);
+            var genreNormalized = NormalizedGenres(genre);
 
             return $"f2p:filter:{platformNormalized}:{genreNormalized}";
         }
@@ -25,7 +25,7 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay.Caching
         {
             return string.IsNullOrWhiteSpace(platform) ? "all" : platform.Trim().ToLower();
         }
-        public static string NormalizedGenre(List<string> genre)
+        public static string NormalizedGenres(List<string> genre)
         {
             return string.Join('.', genre
                     .Where(g => !string.IsNullOrWhiteSpace(g))
