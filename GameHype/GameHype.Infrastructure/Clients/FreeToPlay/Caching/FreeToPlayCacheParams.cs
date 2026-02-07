@@ -8,7 +8,7 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay.Caching
 {
     public class FreeToPlayCacheParams
     {
-        public TimeSpan FilterTtl { get; init; } = TimeSpan.FromMinutes(10);
-        public TimeSpan GameDetailsTtl { get; init; } = TimeSpan.FromMinutes(60);
+        public TimeSpan FilterTtl { get; set; } = TimeSpan.FromMinutes(10);
+        public TimeSpan GameDetailsTtl { get; set; } = TimeSpan.FromMinutes(60);
     }
 }

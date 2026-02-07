@@ -23,7 +23,7 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay.Caching
 
         public static string NormalizedPlatform(string? platform)
         {
-            return string.IsNullOrWhiteSpace(platform) ? "all" : platform.Trim().ToLower();
+            return string.IsNullOrWhiteSpace(platform) ? "all" : platform.Trim().ToLowerInvariant();
         }
         public static string NormalizedGenres(List<string> genre)
         {

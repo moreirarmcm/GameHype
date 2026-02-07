@@ -1,5 +1,4 @@
-﻿
-using GameHype.Application.Clients.FreeToPlay;
+﻿using GameHype.Application.Clients.FreeToPlay;
 using GameHype.Application.Clients.FreeToPlay.Interfaces;
 using GameHype.Application.DTOs;
 using GameHype.Infrastructure.Clients.FreeToPlay.Caching;
@@ -31,7 +30,8 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay
         public async Task <ExternalRecommendedGame?> GetRecommendedGameAsync(List<string> genre, string? platform, int? ramMb)
         {
             var gamesCandidates = await GetGamesCandidatesInCacheAsync(genre, platform); 
-            if (gamesCandidates.Count == 0) return null;
+            if (gamesCandidates.Count == 0) 
+                return null;
 
             if (ramMb is null)
             {
@@ -43,9 +43,8 @@ namespace GameHype.Infrastructure.Clients.FreeToPlay
             foreach(var game in gamesCandidatesSuffled)
             {
                 var gameDetails = await GetGameById(game.Id);
-                if (gameDetails.MinimumRamMb is null) continue;
 
-                if (gameDetails.MinimumRamMb <= ramMb)
+                if (gameDetails.MinimumRamMb is null || gameDetails.MinimumRamMb <= ramMb)
                 {
                     return MapToExternalRecommendedGame(game);
                 }

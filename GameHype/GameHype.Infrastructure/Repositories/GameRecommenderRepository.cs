@@ -21,9 +21,9 @@ namespace GameHype.Infrastructure.Repositories
 
         public async Task SaveRecommendedGameAsync(Game game)
         {
-            _appContext.Games.Add(game);
+           await _appContext.Games.AddAsync(game);
 
-            await _appContext.SaveChangesAsync();
+           await _appContext.SaveChangesAsync();
 
         }
 

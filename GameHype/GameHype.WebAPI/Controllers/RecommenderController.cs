@@ -23,7 +23,7 @@ namespace GameHype.WebAPI.Controllers
                 return BadRequest("Informe, ao menos, um gênero.");
 
             var platform = request.Platform?.Trim().ToLowerInvariant();
-            if (!string.IsNullOrEmpty(platform) && platform != "pc" && platform != "browser")
+            if (platform != "pc" && platform != "browser")
                 platform = "all";
             
             request.Platform = platform;
@@ -34,6 +34,9 @@ namespace GameHype.WebAPI.Controllers
             try
             {
                 var recommendedGame = await _gameRecommender.RecommendedGameAsync(request);
+                
+                if (recommendedGame is null)
+                    return NotFound("Nenhum jogo atende aos critérios informados.");
 
                 return Ok(
                     new
@@ -46,13 +49,13 @@ namespace GameHype.WebAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            catch (InvalidOperationException)
-            {
-                return NotFound("Nenhum jogo atende aos critérios informados.");
-            }
             catch (HttpRequestException)
             {
-                return StatusCode(502, "Erro ao consultar serviço externo.");
+                return StatusCode(StatusCodes.Status502BadGateway, "Erro ao consultar serviço externo.");
+            }
+            catch (TaskCanceledException)
+            {
+                return StatusCode(StatusCodes.Status504GatewayTimeout, "Tempo limite ao consultar serviço externo.");
             }
         }
 

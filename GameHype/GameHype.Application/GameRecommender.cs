@@ -37,7 +37,8 @@ namespace GameHype.Application
                 RecommendedAt = DateTime.UtcNow
             };
 
-            await SaveRecommendedGameAsync(game);
+            await _gameRecommenderRepository.SaveRecommendedGameAsync(game);
+
             var recommendedGamesResponse = new RecommendedGamesResponse
             {
                 Title = chosenGame.Title,
@@ -45,11 +46,6 @@ namespace GameHype.Application
             };
 
             return recommendedGamesResponse;
-        }
-
-        private async Task SaveRecommendedGameAsync(Game game)
-        {
-           await _gameRecommenderRepository.SaveRecommendedGameAsync(game);
         }
 
         public async Task<IEnumerable<RecommendedGamesHistoryResponse?>> GetRecommendedGamesHistoryAsync()
