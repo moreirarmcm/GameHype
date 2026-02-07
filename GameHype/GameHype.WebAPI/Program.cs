@@ -23,16 +23,12 @@ namespace GameHype.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddMemoryCache();
-            builder.Services.Configure<FreeToPlayCacheParams>(static opt =>
+            builder.Services.Configure<FreeToPlayCacheParams>(opt =>
             {
-
+                opt.FilterTtl = TimeSpan.FromMinutes(10);
+                opt.GameDetailsTtl = TimeSpan.FromMinutes(60);
             });
-            builder.Services.Configure<FreeToPlayCacheParams>(par =>
-                new FreeToPlayCacheParams
-                {
-                    FilterTtl = TimeSpan.FromMinutes(10),
-                    GameDetailsTtl = TimeSpan.FromMinutes(60)
-                });
+            
 
             builder.Services.AddHttpClient<IFreeToPlayClient, FreeToPlayClient>(http =>
             {
@@ -45,15 +41,20 @@ namespace GameHype.WebAPI
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=GameHype.db"));
 
             var app = builder.Build();
-
+           
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();
+            }
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            app.UseHttpsRedirection();
+            if (!app.Environment.IsEnvironment("Testing"))
+                app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
@@ -64,3 +65,6 @@ namespace GameHype.WebAPI
         }
     }
 }
+
+public partial class Program { }
+
